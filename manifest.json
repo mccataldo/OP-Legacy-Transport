@@ -1,0 +1,34 @@
+{
+  "name": "ObservePoint Legacy Transport",
+  "author": "Mike Cataldo",
+  "description": "Manually copying audits and journeys from legacy field by field? Ain't nobody got time for that. This extension facilitates copying Web Audits and Web Journeys (Simulations) from the ObservePoint legacy platform to the new one.",
+  "version": "0.3",
+  "permissions": ["activeTab", "tabs", "storage"],
+
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+
+	"content_scripts": [{
+			"matches": [
+				"https://my.observepoint.com/audit/form*",
+        "https://my.observepoint.com/simulation/form*",
+        "https://app.observepoint.com/*"
+			],
+			"js": [
+				"jquery-2.2.3.min.js",
+        "copyJourney.js",
+        "pasteJourney.js",
+			 	"copyAudit.js",
+			 	"pasteAudit.js"
+			]
+	}],
+
+  "browser_action": {
+  	"name": "OP Legacy Transport",
+   	"default_icon": "icon.png",
+    "default_title": "OP Legacy Transport"
+   },
+  "manifest_version": 2
+}
