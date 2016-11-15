@@ -11,7 +11,6 @@ function copyAudit() {
 			console.log(JSON.stringify(output))
 		}
 		)
-
 	}
 }
 
