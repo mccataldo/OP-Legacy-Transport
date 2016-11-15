@@ -1,13 +1,5 @@
 var clone
 
-var options = {
-	env:'https://app.observepoint.com',
-	allowEmail: false,
-	allowStartNow: false,
-	forceStartNow: false,
-	max100Pages: false
-}
-
 function getAuditRequestBody(clone) {
 	var pathArray = window.location.pathname.split('/')
 	var newFolder = pathArray[3]
@@ -263,13 +255,21 @@ function getAuditRequestBody(clone) {
 		}
 	}
 
+	var limit = function () {
+		var limit = parseInt(clone[0].PageLimit)
+		if (options.max100Pages) {
+			limit = 100
+		}
+		return limit
+	}
+
 
 // replaced notificationEmails() with empty array for safety :)
 	var auditActionsReqBody = JSON.stringify(actions())
 	var auditRequestBody = JSON.stringify({
 		"domainId": parseInt(domainId),
 		"name":name(),
-		"limit": parseInt(clone[0].PageLimit),
+		"limit": limit(),
 		"startingUrls": clone[0].StartingPages.split(/\r\n|\n|\r/),
 		"frequency": clone[0].ScheduleFrequencyText.toLowerCase(),
 		"recipients": notificationEmails(),
