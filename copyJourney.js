@@ -11,7 +11,6 @@ function copyJourney() {
 			console.log(JSON.stringify(output))
 		}
 		)
-
 	}
 }
 
