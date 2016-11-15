@@ -28,9 +28,10 @@
 - Rules and Rule Sets field values will not be copied
 - User Agent field value will not be copied but the title of the new object contains this value so you can reference it at any time to update the field.
 - Email/Notifications field value will not be copied, but the functionality exists. It has only been disabled temporarily to prevent customers from getting notifications while testing or training.
+- Audits page maximum is currently capped at 100, therefore this tool will paste the page maximum value as 100 for values over 100 to respect this cap.
 
 ##If you have problems
 - If nothing happens when you click the extension button to paste, you may need to refresh the page - especially if you recently installed the extension. It won't work until you refresh the page.
-- If it still doesn't work, open the Chrome Dev Tools Console to check for errors. When copying, the JSON data copied will appear parsed and strigified (as an object or a string).
+- If it still doesn't work, open the Chrome Dev Tools Console to check for errors. When copying, the JSON data copied will appear parsed and strigified (as an object or a string). Log messages for the pasting actions may be added in the future.
 - Keep in mind that this tool copies only from the edit form for simulations and audits in legacy and pastes only to the audits and journeys tabs in the new platform. Everywhere else, the button is disabled by design.
 - If all else fails, contact me.
