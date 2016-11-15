@@ -1,7 +1,5 @@
 var clone;
 
-var prod_env = 'https://app.observepoint.com'
-
 function getRequestBody(clone) {
 	var pathArray = window.location.pathname.split('/')
 	var newFolder = pathArray[3]
@@ -11,10 +9,14 @@ function getRequestBody(clone) {
 
 		var emails = clone[0].NotificationEmails
 
-		if (emails == "test@example.com") {
-			var emailArr = []
+		if (options.allowEmail) {
+			if (emails == "test@example.com") {
+				return []
+			} else {
+				return emails.split(/\r\n|\n|\r/)
+			}
 		} else {
-			var emailArr = emails.split('↵')
+			return []
 		}
 
 		return emailArr
@@ -144,7 +146,7 @@ function getRequestBody(clone) {
 			return oldName + " - " + userAgent
 		}
 	}
-// replaced notificationEmails() with empty array for safety :)
+	// replaced notificationEmails() with empty array for safety :)
 	var requestBody = JSON.stringify({
 		"name":name(),
 		"domainId": parseInt(domainId),
@@ -166,7 +168,7 @@ function getRequestBody(clone) {
 }
 
 function postJourney(requestBody, key) {
-	var env = prod_env
+	var env = options.env
 	var api = "/api"
 	var resource = "/web-sims"
 	var endpoint = env + api + resource
