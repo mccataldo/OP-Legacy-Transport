@@ -1,11 +1,7 @@
 var clone
 
 var options = {
-	env: {
-		uat: 'http://uat.op.local',
-		ci: 'http://ci.op.local',
-		prod: 'https://app.observepoint.com'
-	},
+	env:'https://app.observepoint.com',
 	allowEmail: false,
 	allowStartNow: false,
 	forceStartNow: false,
@@ -36,13 +32,7 @@ function getAuditRequestBody(clone) {
 	var location = function () {
 		var nl = "mountain"
 		var ol = clone[0].Location
-		// will eventually need support for custom proxy
 
-		// if oldLocation is 1: "mountain"
-		// if oldLocation is 2: "western"
-		// if oldLocation is 4: "eastern"
-		// if oldLocation is 5: "emea"
-		// if oldLocation is 8: "apac"
 		if (ol == 1) {
 			nl = "mountain"
 		}
@@ -62,28 +52,6 @@ function getAuditRequestBody(clone) {
 		return nl
 
 	}
-	// TODO:
-	// var getUserAgents = function () {
-	// 	var data = null;
-	// 	var key = JSON.parse(window.localStorage["op.authorization"]).token
-	// 	var xhr = new XMLHttpRequest();
-	// 	xhr.withCredentials = true;
-	//
-	// 	xhr.addEventListener("readystatechange", function () {
-	// 	  if (this.readyState === 4) {
-	// 			response = JSON.parse(this.responseText)
-	//
-	// 	  }
-	// 	});
-	//
-	// 	xhr.open("GET", "https://app.observepoint.com/api/user-agents", false);
-	// 	xhr.setRequestHeader("authorization", "Bearer " + key)
-	// 	xhr.setRequestHeader("cache-control", "no-cache");
-	//
-	// 	xhr.send(data);
-	// 	return response.data
-	// }
-
 	var userAgent = function (oldUserAgentText) {
 
 		return "Firefox(45.0.1) - Linux"
@@ -125,9 +93,6 @@ function getAuditRequestBody(clone) {
 			if (action == "9") {
 				return "execute"
 			}
-			// if (action == "10") {
-			// 	return "watch"
-			// }
 
 		}
 
@@ -202,21 +167,6 @@ function getAuditRequestBody(clone) {
 			naSet.push(na)
 		}
 		return naSet
-	}
-	// for a migration from legacy "rules" will be empty
-	// because step rules don't exist in legacy
-	// global rules need to be migrated from legacy "Monitor" values
-	var createGlobalRules = function () {
-		// create rules from the Monitor feature (assuming their copied)
-		// POST /rule-sets which requires
-		// tagId, and variables, an array of {variable, matchType, value}
-
-		// return array of ids of the rules
-	}
-
-	var setGlobalRules = function (simId, ruleIds) {
-		// POST /web-sims/simId/rules
-		// the payload is rules which is an array of ruleIds
 	}
 
 	var name = function () {
@@ -349,14 +299,8 @@ function getAuditRequestBody(clone) {
 	return [auditRequestBody, auditActionsReqBody]
 }
 
-// TODO pull this from localStorage
-// function getAccountId () {
-//
-// 	return parseInt(document.getElementById("loggedInAsAnotherBar").innerText.split('d:')[2])
-// }
-
 function postAudit(auditRequestBody, key) {
-	var env = options.env.prod
+	var env = options.env
 	var api = "/api"
 	var resource = "/audits"
 	var endpoint = env + api + resource
@@ -387,7 +331,7 @@ function postAudit(auditRequestBody, key) {
 }
 
 function putAuditActions (id,auditRequestBody, key) {
-	var env = options.env.prod
+	var env = options.env
 	var api = "/api"
 	var resource = "/audits/"+id+"/actions"
 	var endpoint = env + api + resource
@@ -425,9 +369,9 @@ function pasteAudit() {
 		customerKey = JSON.parse(window.localStorage["op.authorization"]).token
 		rb = getAuditRequestBody(clone)
 		newAudit = postAudit(rb, customerKey)
-		location.reload()
 		console.log("auditRequestBody: " + rb[0])
 		console.log("auditActionsReqBody: " + rb[1])
 		console.log("Success!")
+		location.reload()
 	});
 }

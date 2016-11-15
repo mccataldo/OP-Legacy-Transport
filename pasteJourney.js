@@ -1,6 +1,5 @@
 var clone;
-var uat_env = 'http://uat.op.local'
-var ci_env = 'http://ci.op.local'
+
 var prod_env = 'https://app.observepoint.com'
 
 function getRequestBody(clone) {
@@ -24,11 +23,7 @@ function getRequestBody(clone) {
 	var location = function () {
 		var nl = "mountain"
 		var ol = clone[0].Location
-		// if oldLocation is 1: "mountain"
-		// if oldLocation is 2: "western"
-		// if oldLocation is 4: "eastern"
-		// if oldLocation is 5: "emea"
-		// if oldLocation is 8: "apac"
+
 		if (ol == 1) {
 			nl = "mountain"
 		}
@@ -47,27 +42,6 @@ function getRequestBody(clone) {
 
 		return nl
 
-	}
-// TODO:
-	var getUserAgents = function () {
-		var data = null;
-		var key = JSON.parse(window.localStorage["op.authorization"]).token
-		var xhr = new XMLHttpRequest();
-		xhr.withCredentials = true;
-
-		xhr.addEventListener("readystatechange", function () {
-		  if (this.readyState === 4) {
-				response = JSON.parse(this.responseText)
-
-		  }
-		});
-
-		xhr.open("GET", "https://app.observepoint.com/api/user-agents", false);
-		xhr.setRequestHeader("authorization", "Bearer " + key)
-		xhr.setRequestHeader("cache-control", "no-cache");
-
-		xhr.send(data);
-		return response.data
 	}
 
 	var userAgent = function (oldUserAgentText) {
@@ -159,21 +133,6 @@ function getRequestBody(clone) {
 		}
 		return naSet
 	}
-	// for a migration from legacy "rules" will be empty
-	// because step rules don't exist in legacy
-	// global rules need to be migrated from legacy "Monitor" values
-	var createGlobalRules = function () {
-		// create rules from the Monitor feature (assuming their copied)
-		// POST /rule-sets which requires
-		// tagId, and variables, an array of {variable, matchType, value}
-
-		// return array of ids of the rules
-	}
-
-	var setGlobalRules = function (simId, ruleIds) {
-		// POST /web-sims/simId/rules
-		// the payload is rules which is an array of ruleIds
-	}
 
 	var name = function () {
 		var oldName = clone[0].Name
@@ -204,12 +163,6 @@ function getRequestBody(clone) {
 	})
 
 	return requestBody
-}
-
-// TODO pull this from localStorage
-function getAccountId () {
-
-	return parseInt(document.getElementById("loggedInAsAnotherBar").innerText.split('d:')[2])
 }
 
 function postJourney(requestBody, key) {
@@ -251,8 +204,8 @@ function pasteJourney() {
 		customerKey = JSON.parse(window.localStorage["op.authorization"]).token
 		rb = getRequestBody(clone)
 		newJourneyId = postJourney(rb, customerKey)
-		location.reload()
 		console.log("requestBody: " + JSON.parse(rb))
 		console.log("Success! Web Journey ID: " + newJourneyId)
+		location.reload()
 	});
 }
