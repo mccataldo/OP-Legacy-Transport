@@ -29,6 +29,8 @@
 - User Agent field value will not be copied but the title of the new object contains this value so you can reference it at any time to update the field.
 - Email/Notifications field value will not be copied, but the functionality exists. It has only been disabled temporarily to prevent customers from getting notifications while testing or training.
 - Audits page maximum is currently capped at 100, therefore this tool will paste the page maximum value as 100 for values over 100 to respect this cap.
+- Currently custom proxy is not supported on the new platform so the custom proxy settings will not be pasted.
+- Silent Mode is also not supported on the new platform, however the name of the audit will contain 'Silent Mode' if this setting was on for the audit in legacy. 
 
 ##If you have problems
 - If nothing happens when you click the extension button to paste, you may need to refresh the page - especially if you recently installed the extension. It won't work until you refresh the page.
