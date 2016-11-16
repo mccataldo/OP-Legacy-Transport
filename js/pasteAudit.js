@@ -257,7 +257,7 @@ function getAuditRequestBody(clone) {
 
 	var limit = function () {
 		var limit = parseInt(clone[0].PageLimit)
-		if (options.max100Pages) {
+		if (options.max100Pages && limit > 100) {
 			limit = 100
 		}
 		return limit
