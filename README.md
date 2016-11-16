@@ -37,3 +37,5 @@
 - If it still doesn't work, open the Chrome Dev Tools Console to check for errors. When copying, the JSON data copied will appear parsed and strigified (as an object or a string). Log messages for the pasting actions may be added in the future.
 - Keep in mind that this tool copies only from the edit form for simulations and audits in legacy and pastes only to the audits and journeys tabs in the new platform. Everywhere else, the button is disabled by design.
 - If all else fails, contact me.
+
+![Alt text](images/screenshot.jpg?raw=true "Optional Title")
