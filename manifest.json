@@ -4,6 +4,7 @@
   "homepage_url": "https://github.com/mccataldo/OP-Legacy-Transport",
   "description": "This extension facilitates copying Web Audits and Journeys (Simulations) from the ObservePoint legacy platform to the new one.",
   "version": "0.4",
+  "short_name": "ObservePoint Legacy Transport",
   "permissions": ["activeTab", "tabs", "storage"],
   "background": {
     "scripts": ["js/background.js"],
