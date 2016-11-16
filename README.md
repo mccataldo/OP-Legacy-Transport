@@ -24,7 +24,7 @@
 4. Click the icon again
 5. The new Web Journey will appear in the Journeys tab
 
-##Limitations (version 0.4)
+##Limitations (version 0.5)
 - Rules and Rule Sets field values will not be copied
 - User Agent field value will not be copied but the title of the new object contains this value so you can reference it at any time to update the field.
 - Email/Notifications field value will not be copied, but the functionality exists. It has only been disabled temporarily to prevent customers from getting notifications while testing or training.
